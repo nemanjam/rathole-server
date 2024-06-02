@@ -11,4 +11,4 @@ services:
       - 443:5443
       # host:container
     volumes:
-      - ./rathole.server.toml:/config/server.toml:ro
+      - ./rathole.server.toml:/config/rathole.server.toml:ro
