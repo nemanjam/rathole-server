@@ -1,14 +1,15 @@
 [server]
-bind_addr = "0.0.0.0:2333"  # port to run rathole on.
+bind_addr = "0.0.0.0:2333"
 
 [server.transport]
 type = "noise"
+
 [server.transport.noise]
-local_private_key = "<private_key>"  # private key from the command above
+local_private_key = "private_key"
 
 [server.services.traefik-http]
-token = "secret_token"  # change to any secret string.
-bind_addr = "0.0.0.0:5080"  # port to expose the local service on vps.
+token = "secret_token"
+bind_addr = "0.0.0.0:5080"
 
 [server.services.traefik-https]
 token = "secret_token"

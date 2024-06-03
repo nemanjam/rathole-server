@@ -3,12 +3,15 @@ version: '3.8'
 services:
   rathole:
     image: rapiz1/rathole:v0.5.0
+    container_name: rathole
     command: --server /config/rathole.server.toml
     restart: unless-stopped
     ports:
+      # host:container
       - 2333:2333
       - 80:5080
       - 443:5443
-      # host:container
     volumes:
       - ./rathole.server.toml:/config/rathole.server.toml:ro
+
+

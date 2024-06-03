@@ -14,9 +14,9 @@ docker run -it --rm rapiz1/rathole --genkey
 # <public_key>
 ```
 
-- copy `rathole.server.toml` with keys:
 
-```
+```bash
+# copy `rathole.server.toml` with keys:
+
 scp ./rathole.server.toml ubuntu@amd2:~/rathole-server/rathole.server.toml
 ```
-
