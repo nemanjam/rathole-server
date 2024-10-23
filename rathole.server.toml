@@ -7,10 +7,20 @@ type = "noise"
 [server.transport.noise]
 local_private_key = "private_key"
 
+# local
 [server.services.traefik-http]
 token = "secret_token"
 bind_addr = "0.0.0.0:5080"
 
 [server.services.traefik-https]
 token = "secret_token"
-bind_addr = "0.0.0.0:5443"  
+bind_addr = "0.0.0.0:5443"
+
+# pi
+[server.services.pi-traefik-http]
+token = "secret_token"
+bind_addr = "0.0.0.0:5081"
+
+[server.services.pi-traefik-https]
+token = "secret_token"
+bind_addr = "0.0.0.0:5444"  
