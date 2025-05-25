@@ -26,3 +26,15 @@ scp ./rathole.server.toml ubuntu@amd2:~/rathole-server/rathole.server.toml
 ```bash
 openssl rand -base64 32
 ```
+
+### With Traefik TCP router for 80 and 443
+
+```
+git checkout feat/traefik-tcp-router
+```
+
+#### Create proxy network
+
+```bash
+docker network create proxy
+```
