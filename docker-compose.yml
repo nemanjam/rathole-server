@@ -4,19 +4,32 @@ services:
   traefik:
     image: traefik:v2.9.8
     container_name: traefik
+    restart: unless-stopped
     command:
       - --providers.docker=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443
-      - --api.dashboard=false
+      - --entrypoints.traefik.address=:8080
+      - --api.dashboard=true
+      - --api.insecure=false
       - --log.level=DEBUG
+      - --accesslog=true
     ports:
       - 80:80
       - 443:443
+      - 8080:8080
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - proxy
+    labels:
+      # Enable the dashboard at https://traefik.amd2.nemanjamitic.com
+      - traefik.enable=true
+      - 'traefik.http.routers.traefik.rule=Host(`traefik.amd2.${SITE_HOSTNAME}`)'
+      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.service=api@internal
+      - traefik.http.routers.traefik.middlewares=auth
+      - 'traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_AUTH}'
 
   rathole:
     image: rapiz1/rathole:v0.5.0
