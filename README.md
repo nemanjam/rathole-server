@@ -47,5 +47,6 @@ sudo apt install apache2-utils
 htpasswd -nb admin yourpassword
 
 # starts with admin:...
-# escape $ with single \
+# escape $ with single \ AND QUOTES ""  
+# example: TRAEFIK_AUTH="admin:\$asd1\$E3lsdAo\$3Mertp50JJ4LVU.HRR0"
 ```

@@ -23,10 +23,10 @@ services:
     networks:
       - proxy
     labels:
-      # Enable the dashboard at https://traefik.amd2.nemanjamitic.com
+      # Enable the dashboard at http://traefik.amd2.nemanjamitic.com
       - traefik.enable=true
       - 'traefik.http.routers.traefik.rule=Host(`traefik.amd2.${SITE_HOSTNAME}`)'
-      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.entrypoints=web
       - traefik.http.routers.traefik.service=api@internal
       - traefik.http.routers.traefik.middlewares=auth
       - 'traefik.http.middlewares.auth.basicauth.users=${TRAEFIK_AUTH}'
