@@ -11,18 +11,18 @@ local_private_key = "private_key"
 
 # pi
 [server.services.pi-traefik-http]
-token = "secret_token_2"
+token = "secret_token_1"
 bind_addr = "0.0.0.0:5080"
 
 [server.services.pi-traefik-https]
-token = "secret_token_2"
+token = "secret_token_1"
 bind_addr = "0.0.0.0:5443"  
 
 # local
 [server.services.local-traefik-http]
-token = "secret_token_1"
+token = "secret_token_2"
 bind_addr = "0.0.0.0:5081"
 
 [server.services.local-traefik-https]
-token = "secret_token_1"
+token = "secret_token_2"
 bind_addr = "0.0.0.0:5444"
