@@ -24,6 +24,7 @@ services:
       - proxy
     labels:
       # Enable the dashboard at http://traefik.amd2.nemanjamitic.com
+      # http for simplicity, no acme.json file
       - traefik.enable=true
       - 'traefik.http.routers.traefik.rule=Host(`traefik.amd2.${SITE_HOSTNAME}`)'
       - traefik.http.routers.traefik.entrypoints=web
