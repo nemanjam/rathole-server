@@ -1,0 +1,28 @@
+[server]
+bind_addr = "0.0.0.0:2333"
+
+[server.transport]
+type = "noise"
+
+[server.transport.noise]
+local_private_key = "private_key"
+
+# separated based on token, also can NOT use same port
+
+# pi
+[server.services.pi-traefik-http]
+token = "secret_token_1"
+bind_addr = "0.0.0.0:5080"
+
+[server.services.pi-traefik-https]
+token = "secret_token_1"
+bind_addr = "0.0.0.0:5443"  
+
+# local
+[server.services.local-traefik-http]
+token = "secret_token_2"
+bind_addr = "0.0.0.0:5081"
+
+[server.services.local-traefik-https]
+token = "secret_token_2"
+bind_addr = "0.0.0.0:5444"
