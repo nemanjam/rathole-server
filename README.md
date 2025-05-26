@@ -38,3 +38,14 @@ git checkout feat/traefik-tcp-router
 ```bash
 docker network create proxy
 ```
+
+### Traefik dashboard for debugging
+
+```bash
+sudo apt install apache2-utils
+
+htpasswd -nb admin yourpassword
+
+# starts with admin:...
+# escape $ with single \
+```
