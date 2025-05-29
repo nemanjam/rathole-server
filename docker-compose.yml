@@ -45,21 +45,21 @@ services:
       - proxy
 
     labels:
-      ### HTTP port 80 ###
+      ### HTTP port 80 - HTTP routers ###
 
       # Route *.pi.nemanjamitic.com -> 5080
-      - 'traefik.tcp.routers.rathole-pi.rule=HostSNIRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
-      - traefik.tcp.routers.rathole-pi.entrypoints=web
-      - traefik.tcp.routers.rathole-pi.service=rathole-pi
-      - traefik.tcp.services.rathole-pi.loadbalancer.server.port=5080
+      - 'traefik.http.routers.rathole-pi.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
+      - traefik.http.routers.rathole-pi.entrypoints=web
+      - traefik.http.routers.rathole-pi.service=rathole-pi
+      - traefik.http.services.rathole-pi.loadbalancer.server.port=5080
 
       # Route *.local.nemanjamitic.com -> 5081
-      - 'traefik.tcp.routers.rathole-local.rule=HostSNIRegexp(`{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
-      - traefik.tcp.routers.rathole-local.entrypoints=web
-      - traefik.tcp.routers.rathole-local.service=rathole-local
-      - traefik.tcp.services.rathole-local.loadbalancer.server.port=5081
+      - 'traefik.http.routers.rathole-local.rule=HostRegexp(`{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
+      - traefik.http.routers.rathole-local.entrypoints=web
+      - traefik.http.routers.rathole-local.service=rathole-local
+      - traefik.http.services.rathole-local.loadbalancer.server.port=5081
 
-      ### HTTPS port 443 with TLS passthrough ###
+      ### HTTPS port 443 with TLS passthrough - TCP routers ###
 
       # Route *.pi.nemanjamitic.com -> 5443
       - 'traefik.tcp.routers.rathole-pi-secure.rule=HostSNIRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
