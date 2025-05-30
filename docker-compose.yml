@@ -50,13 +50,13 @@ services:
       # pi.nemanjamitic.com, www.pi.nemanjamitic.com, *.pi.nemanjamitic.com, www.*.pi.nemanjamitic.com
       
       # Route *.pi.nemanjamitic.com -> 5080
-      - 'traefik.http.routers.rathole-pi.rule=Host(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`) || HostRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
+      - 'traefik.http.routers.rathole-pi.rule=HostRegexp(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
       - traefik.http.routers.rathole-pi.entrypoints=web
       - traefik.http.routers.rathole-pi.service=rathole-pi
       - traefik.http.services.rathole-pi.loadbalancer.server.port=5080
 
       # Route *.local.nemanjamitic.com -> 5081
-      - 'traefik.http.routers.rathole-local.rule=Host(`local.${SITE_HOSTNAME}`, `www.local.${SITE_HOSTNAME}`) || HostRegexp(`{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
+      - 'traefik.http.routers.rathole-local.rule=HostRegexp(`local.${SITE_HOSTNAME}`, `www.local.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
       - traefik.http.routers.rathole-local.entrypoints=web
       - traefik.http.routers.rathole-local.service=rathole-local
       - traefik.http.services.rathole-local.loadbalancer.server.port=5081
@@ -64,14 +64,14 @@ services:
       ### HTTPS port 443 with TLS passthrough - TCP routers ###
 
       # Route *.pi.nemanjamitic.com -> 5443
-      - 'traefik.http.routers.rathole-pi-secure.rule=HostSNI(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`) || HostSNIRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
+      - 'traefik.tcp.routers.rathole-pi-secure.rule=HostSNIRegexp(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
       - traefik.tcp.routers.rathole-pi-secure.entrypoints=websecure
       - traefik.tcp.routers.rathole-pi-secure.tls.passthrough=true
       - traefik.tcp.routers.rathole-pi-secure.service=rathole-pi-secure
       - traefik.tcp.services.rathole-pi-secure.loadbalancer.server.port=5443
 
       # Route *.local.nemanjamitic.com -> 5444
-      - 'traefik.http.routers.rathole-local-secure.rule=HostSNI(`local.${SITE_HOSTNAME}`, `local.${SITE_HOSTNAME}`) || HostSNIRegexp(`{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
+      - 'traefik.tcp.routers.rathole-local-secure.rule=HostSNIRegexp(`local.${SITE_HOSTNAME}`, `www.local.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
       - traefik.tcp.routers.rathole-local-secure.entrypoints=websecure
       - traefik.tcp.routers.rathole-local-secure.tls.passthrough=true
       - traefik.tcp.routers.rathole-local-secure.service=rathole-local-secure
