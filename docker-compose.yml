@@ -64,7 +64,8 @@ services:
       ### HTTPS port 443 with TLS passthrough - TCP routers ###
 
       # Route *.pi.nemanjamitic.com -> 5443
-      - 'traefik.http.routers.rathole-pi-secure.rule=HostSNI(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`) || HostSNIRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
+      - 'traefik.http.routers.rathole-pi-secure.rule=HostSNI(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`)'
+      # - 'traefik.http.routers.rathole-pi-secure.rule=HostSNI(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`) || HostSNIRegexp(`{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
       - traefik.tcp.routers.rathole-pi-secure.entrypoints=websecure
       - traefik.tcp.routers.rathole-pi-secure.tls.passthrough=true
       - traefik.tcp.routers.rathole-pi-secure.service=rathole-pi-secure
