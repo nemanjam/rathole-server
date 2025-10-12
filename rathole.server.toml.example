@@ -7,22 +7,33 @@ type = "noise"
 [server.transport.noise]
 local_private_key = "private_key"
 
-# separated based on token, also can NOT use same port
+# separated based on token
+# ports MUST be different
+# tokens MUST be different
 
-# pi
-[server.services.pi-traefik-http]
+# mini pc
+[server.services.mpc-traefik-http]
 token = "secret_token_1"
 bind_addr = "0.0.0.0:5080"
 
-[server.services.pi-traefik-https]
+[server.services.mpc-traefik-https]
 token = "secret_token_1"
-bind_addr = "0.0.0.0:5443"  
+bind_addr = "0.0.0.0:5443"
 
-# local
-[server.services.local-traefik-http]
+# opi
+[server.services.opi-traefik-http]
 token = "secret_token_2"
 bind_addr = "0.0.0.0:5081"
 
-[server.services.local-traefik-https]
+[server.services.opi-traefik-https]
 token = "secret_token_2"
-bind_addr = "0.0.0.0:5444"
+bind_addr = "0.0.0.0:5444" 
+
+# rpi
+[server.services.rpi-traefik-http]
+token = "secret_token_3"
+bind_addr = "0.0.0.0:5082"
+
+[server.services.rpi-traefik-https]
+token = "secret_token_3"
+bind_addr = "0.0.0.0:5445" 

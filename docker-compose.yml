@@ -47,35 +47,48 @@ services:
     labels:
       ### HTTP port 80 - HTTP routers ###
 
-      # pi.nemanjamitic.com, www.pi.nemanjamitic.com, *.pi.nemanjamitic.com, www.*.pi.nemanjamitic.com
-      
-      # Route *.pi.nemanjamitic.com -> 5080
-      - 'traefik.http.routers.rathole-pi.rule=HostRegexp(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
-      - traefik.http.routers.rathole-pi.entrypoints=web
-      - traefik.http.routers.rathole-pi.service=rathole-pi
-      - traefik.http.services.rathole-pi.loadbalancer.server.port=5080
+      # mpc.nemanjamitic.com, www.mpc.nemanjamitic.com, *.mpc.nemanjamitic.com, www.*.mpc.nemanjamitic.com
 
-      # Route *.local.nemanjamitic.com -> 5081
-      - 'traefik.http.routers.rathole-local.rule=HostRegexp(`local.${SITE_HOSTNAME}`, `www.local.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
-      - traefik.http.routers.rathole-local.entrypoints=web
-      - traefik.http.routers.rathole-local.service=rathole-local
-      - traefik.http.services.rathole-local.loadbalancer.server.port=5081
+      # Route *.mpc.nemanjamitic.com -> 5080
+      - 'traefik.http.routers.rathole-mpc.rule=HostRegexp(`mpc.${SITE_HOSTNAME}`, `www.mpc.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME}`)'
+      - traefik.http.routers.rathole-mpc.entrypoints=web
+      - traefik.http.routers.rathole-mpc.service=rathole-mpc
+      - traefik.http.services.rathole-mpc.loadbalancer.server.port=5080
+      
+      # Route *.opi.nemanjamitic.com -> 5081
+      - 'traefik.http.routers.rathole-opi.rule=HostRegexp(`opi.${SITE_HOSTNAME}`, `www.opi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME}`)'
+      - traefik.http.routers.rathole-opi.entrypoints=web
+      - traefik.http.routers.rathole-opi.service=rathole-opi
+      - traefik.http.services.rathole-opi.loadbalancer.server.port=5081
+
+      # Route *.rpi.nemanjamitic.com -> 5082
+      - 'traefik.http.routers.rathole-rpi.rule=HostRegexp(`rpi.${SITE_HOSTNAME}`, `www.rpi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME}`)'
+      - traefik.http.routers.rathole-rpi.entrypoints=web
+      - traefik.http.routers.rathole-rpi.service=rathole-rpi
+      - traefik.http.services.rathole-rpi.loadbalancer.server.port=5082
 
       ### HTTPS port 443 with TLS passthrough - TCP routers ###
 
-      # Route *.pi.nemanjamitic.com -> 5443
-      - 'traefik.tcp.routers.rathole-pi-secure.rule=HostSNIRegexp(`pi.${SITE_HOSTNAME}`, `www.pi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.pi.${SITE_HOSTNAME}`)'
-      - traefik.tcp.routers.rathole-pi-secure.entrypoints=websecure
-      - traefik.tcp.routers.rathole-pi-secure.tls.passthrough=true
-      - traefik.tcp.routers.rathole-pi-secure.service=rathole-pi-secure
-      - traefik.tcp.services.rathole-pi-secure.loadbalancer.server.port=5443
+      # Route *.mpc.nemanjamitic.com -> 5443
+      - 'traefik.tcp.routers.rathole-mpc-secure.rule=HostSNIRegexp(`mpc.${SITE_HOSTNAME}`, `www.mpc.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME}`)'
+      - traefik.tcp.routers.rathole-mpc-secure.entrypoints=websecure
+      - traefik.tcp.routers.rathole-mpc-secure.tls.passthrough=true
+      - traefik.tcp.routers.rathole-mpc-secure.service=rathole-mpc-secure
+      - traefik.tcp.services.rathole-mpc-secure.loadbalancer.server.port=5443
 
-      # Route *.local.nemanjamitic.com -> 5444
-      - 'traefik.tcp.routers.rathole-local-secure.rule=HostSNIRegexp(`local.${SITE_HOSTNAME}`, `www.local.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.local.${SITE_HOSTNAME}`)'
-      - traefik.tcp.routers.rathole-local-secure.entrypoints=websecure
-      - traefik.tcp.routers.rathole-local-secure.tls.passthrough=true
-      - traefik.tcp.routers.rathole-local-secure.service=rathole-local-secure
-      - traefik.tcp.services.rathole-local-secure.loadbalancer.server.port=5444
+      # Route *.opi.nemanjamitic.com -> 5444
+      - 'traefik.tcp.routers.rathole-opi-secure.rule=HostSNIRegexp(`opi.${SITE_HOSTNAME}`, `www.opi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME}`)'
+      - traefik.tcp.routers.rathole-opi-secure.entrypoints=websecure
+      - traefik.tcp.routers.rathole-opi-secure.tls.passthrough=true
+      - traefik.tcp.routers.rathole-opi-secure.service=rathole-opi-secure
+      - traefik.tcp.services.rathole-opi-secure.loadbalancer.server.port=5444
+
+      # Route *.rpi.nemanjamitic.com -> 5445
+      - 'traefik.tcp.routers.rathole-rpi-secure.rule=HostSNIRegexp(`rpi.${SITE_HOSTNAME}`, `www.rpi.${SITE_HOSTNAME}`, `{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME}`, `www.{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME}`)'
+      - traefik.tcp.routers.rathole-rpi-secure.entrypoints=websecure
+      - traefik.tcp.routers.rathole-rpi-secure.tls.passthrough=true
+      - traefik.tcp.routers.rathole-rpi-secure.service=rathole-rpi-secure
+      - traefik.tcp.services.rathole-rpi-secure.loadbalancer.server.port=5445
 
 networks:
   proxy:
