@@ -90,6 +90,51 @@ services:
       - traefik.tcp.routers.rathole-rpi-secure.service=rathole-rpi-secure
       - traefik.tcp.services.rathole-rpi-secure.loadbalancer.server.port=5445
 
+      # ------------------------------------------------------------------
+
+      # mpc.varalicar.rs, www.mpc.varalicar.rs, *.mpc.varalicar.rs, www.*.mpc.varalicar.rs
+
+      # Route *.mpc.varalicar.rs -> 5080
+      - 'traefik.http.routers.rathole-mpc-2.rule=HostRegexp(`mpc.${SITE_HOSTNAME_2}`, `www.mpc.${SITE_HOSTNAME_2}`, `{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME_2}`, `www.{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME_2}`)'
+      - traefik.http.routers.rathole-mpc-2.entrypoints=web
+      - traefik.http.routers.rathole-mpc-2.service=rathole-mpc-2
+      - traefik.http.services.rathole-mpc-2.loadbalancer.server.port=5080
+      
+      # Route *.opi.varalicar.rs -> 5081
+      - 'traefik.http.routers.rathole-opi-2.rule=HostRegexp(`opi.${SITE_HOSTNAME_2}`, `www.opi.${SITE_HOSTNAME_2}`, `{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME_2}`, `www.{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME_2}`)'
+      - traefik.http.routers.rathole-opi-2.entrypoints=web
+      - traefik.http.routers.rathole-opi-2.service=rathole-opi-2
+      - traefik.http.services.rathole-opi-2.loadbalancer.server.port=5081
+
+      # Route *.rpi.varalicar.rs -> 5082
+      - 'traefik.http.routers.rathole-rpi-2.rule=HostRegexp(`rpi.${SITE_HOSTNAME_2}`, `www.rpi.${SITE_HOSTNAME_2}`, `{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME_2}`, `www.{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME_2}`)'
+      - traefik.http.routers.rathole-rpi-2.entrypoints=web
+      - traefik.http.routers.rathole-rpi-2.service=rathole-rpi-2
+      - traefik.http.services.rathole-rpi-2.loadbalancer.server.port=5082
+
+      ### HTTPS port 443 with TLS passthrough - TCP routers ###
+
+      # Route *.mpc.varalicar.rs -> 5443
+      - 'traefik.tcp.routers.rathole-mpc-secure-2.rule=HostSNIRegexp(`mpc.${SITE_HOSTNAME_2}`, `www.mpc.${SITE_HOSTNAME_2}`, `{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME_2}`, `www.{subdomain:[a-z0-9-]+}.mpc.${SITE_HOSTNAME_2}`)'
+      - traefik.tcp.routers.rathole-mpc-secure-2.entrypoints=websecure
+      - traefik.tcp.routers.rathole-mpc-secure-2.tls.passthrough=true
+      - traefik.tcp.routers.rathole-mpc-secure-2.service=rathole-mpc-secure-2
+      - traefik.tcp.services.rathole-mpc-secure-2.loadbalancer.server.port=5443
+
+      # Route *.opi.varalicar.rs -> 5444
+      - 'traefik.tcp.routers.rathole-opi-secure-2.rule=HostSNIRegexp(`opi.${SITE_HOSTNAME_2}`, `www.opi.${SITE_HOSTNAME_2}`, `{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME_2}`, `www.{subdomain:[a-z0-9-]+}.opi.${SITE_HOSTNAME_2}`)'
+      - traefik.tcp.routers.rathole-opi-secure-2.entrypoints=websecure
+      - traefik.tcp.routers.rathole-opi-secure-2.tls.passthrough=true
+      - traefik.tcp.routers.rathole-opi-secure-2.service=rathole-opi-secure-2
+      - traefik.tcp.services.rathole-opi-secure-2.loadbalancer.server.port=5444
+
+      # Route *.rpi.varalicar.rs -> 5445
+      - 'traefik.tcp.routers.rathole-rpi-secure-2.rule=HostSNIRegexp(`rpi.${SITE_HOSTNAME_2}`, `www.rpi.${SITE_HOSTNAME_2}`, `{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME_2}`, `www.{subdomain:[a-z0-9-]+}.rpi.${SITE_HOSTNAME_2}`)'
+      - traefik.tcp.routers.rathole-rpi-secure-2.entrypoints=websecure
+      - traefik.tcp.routers.rathole-rpi-secure-2.tls.passthrough=true
+      - traefik.tcp.routers.rathole-rpi-secure-2.service=rathole-rpi-secure-2
+      - traefik.tcp.services.rathole-rpi-secure-2.loadbalancer.server.port=5445
+
 networks:
   proxy:
     external: true
